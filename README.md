@@ -31,4 +31,4 @@ gcc -o tienda tienda.c
 
 ## Autor
 
-Nombre Apellido
+Mateo Acero
