@@ -1,32 +1,29 @@
-/*
-  ISWZ1102 - Programacion I
-  Ejercicio: gestion de venta de un producto
-  Autor: Nombre Apellido
-*/
+// trabajo de Mateo Acero :)
 #include <stdio.h>
-
+// dentro de int main declaro todo
+// Todo bien ordenado e iterado, para que el codigo este bello. 
 int main() {
-    /* Datos del producto */
+    //Datos del producto 
     int id = 0;
     char nombre[30];
     int stock = 0;
     float precio = 0;
 
-    /* Datos de las ventas */
+    //Datos de las ventas 
     float ganancias = 0;
     int vendidas = 0;
-    int registrado = 0;      /* 0 = no hay producto, 1 = ya se registro */
+    int registrado = 0;    
 
-    /* Variables auxiliares */
+    //Variablesssss
     int opcion = 0;
     int cantidad = 0;
     int descuento = 0;
     float precioFinal = 0;
     float totalVenta = 0;
-
+// En do-while, para que el usuario se quede dentro, hasta que elija la opcion de SALIR obvio
     do {
         printf("\n=================================\n");
-        printf("\tMENU PRINCIPAL\n");
+        printf("\tMENU PRINCIPAaL\n");
         printf("=================================\n");
         printf("1. Registrar producto\n");
         printf("2. Vender producto\n");
@@ -34,14 +31,14 @@ int main() {
         printf("4. Consultar producto\n");
         printf("5. Ver ganancias\n");
         printf("6. Salir\n");
-        printf("Elija una opcion: ");
+        printf("Elija una opcin: ");
 
         opcion = 0;
         scanf("%d", &opcion);
-        while (getchar() != '\n');   /* borra lo que sobre (por ejemplo, letras) */
-
+        while (getchar() != '\n');  
+        // ocupo switch para empezar el menu y poner las opciones
         switch (opcion) {
-        case 1: /* ----- Registrar ----- */
+        case 1: 
             if (registrado == 1) {
                 printf("\nYa hay un producto registrado.\n");
                 break;
@@ -57,12 +54,12 @@ int main() {
 
             printf("Nombre (una palabra): ");
             scanf("%29s", nombre);
-            while (getchar() != '\n');
+            while (getchar() != '\n'); //Aqui se limpia el buffer de entrada para evitar problemas con fgets, porque se ponia medio mal
 
             printf("Stock inicial: ");
             stock = -1;
             scanf("%d", &stock);
-            while (getchar() != '\n');
+            while (getchar() != '\n'); // SIempre limpiar el buffer de entrada por si acasooo
             if (stock < 0) {
                 printf("Error: el stock debe ser 0 o mayor.\n");
                 break;
@@ -81,7 +78,7 @@ int main() {
             printf("\nProducto registrado correctamente.\n");
             break;
 
-        case 2: /* ----- Vender ----- */
+        case 2: //venta 
             if (registrado == 0) {
                 printf("\nPrimero registre el producto.\n");
                 break;
@@ -105,15 +102,13 @@ int main() {
             descuento = -1;
             scanf("%d", &descuento);
             while (getchar() != '\n');
-            if (descuento < 0 || descuento > 100) {
+            if (descuento < 0 || descuento > 100) { //veo que el descuento este entre 0 y 100
                 printf("Error: el descuento debe estar entre 0 y 100.\n");
                 break;
             }
-
+                //calculo de precios finales y para actualizar el stock, por ejemplo si vendo 5, se restan 5
             precioFinal = precio - precio * descuento / 100;
             totalVenta = precioFinal * cantidad;
-
-            /* solo se actualiza si la venta es valida */
             stock = stock - cantidad;
             vendidas = vendidas + cantidad;
             ganancias = ganancias + totalVenta;
@@ -124,11 +119,11 @@ int main() {
             printf("\tStock actual:\t%d\n", stock);
             break;
 
-        case 3: /* ----- Reabastecer ----- */
+        case 3: //reabastecimiento
             if (registrado == 0) {
                 printf("\nPrimero registre el producto.\n");
                 break;
-            }
+            } 
             printf("\nCantidad a agregar: ");
             cantidad = 0;
             scanf("%d", &cantidad);
@@ -141,33 +136,33 @@ int main() {
             printf("Stock actualizado: %d\n", stock);
             break;
 
-        case 4: /* ----- Consultar ----- */
+        case 4: //consultar
             if (registrado == 0) {
                 printf("\nPrimero registre el producto.\n");
                 break;
             }
-            printf("\n--- Datos del producto ---\n");
+            printf("\n=== Datos del producto ===\n");
             printf("\tID:\t%d\n", id);
             printf("\tNombre:\t%s\n", nombre);
             printf("\tStock:\t%d\n", stock);
             printf("\tPrecio:\t$%.2f\n", precio);
             break;
 
-        case 5: /* ----- Ganancias ----- */
+        case 5: //ganancias 
             printf("\n--- Ganancias ---\n");
             printf("\tUnidades vendidas:\t%d\n", vendidas);
             printf("\tGanancias totales:\t$%.2f\n", ganancias);
             break;
 
-        case 6: /* ----- Salir ----- */
+        case 6: //salimos del programa
             printf("\nGracias por usar el programa.\n");
             break;
 
-        default:
+        default: //opcion invalida, porque el usuario siempre puede equivocarse 
             printf("\nOpcion invalida. Elija un numero del 1 al 6.\n");
             break;
-        }
-    } while (opcion != 6);
+        } // fin del switch
+    } while (opcion != 6); // fin del do-while
 
     return 0;
 }
